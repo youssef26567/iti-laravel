@@ -13,8 +13,11 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
+            <th scope="col">Details</th>
           </tr>
         </thead>
         <tbody>
@@ -23,11 +26,32 @@
             <th scope="row">{{$index}}</th>
             <td>{{$book['title']}}</td>
             <td>{{$book['price']}}</td>
-            
+            <td>
+              <form action="{{route('books.destroy',$book['id'])}}" method="POST">
+              @csrf
+              @method('Delete')
+              <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+            <td>
+            <form action="{{route('books.edit',$book['id'])}}">
+              <button type="submit" class="btn btn-warning" > Update
+              </button>
+            </form>
+
+            </td>
+            <td>
+              <form action="{{route('books.show',$book['id'])}}"  >
+                <button type="submit" class="btn btn-success">Details</button>
+              </form>
+  
+              </td>
           </tr>
           @endforeach
         </tbody>
       </table>
-          
+     
+      
+      {{ $books->links() }}
 </body>
 </html>

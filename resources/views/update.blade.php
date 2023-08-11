@@ -8,8 +8,9 @@
 
 <div class="container">
   <h2>{{$page}}</h2>
-  <form method="POST" action="{{route('books.store')}}">
-    @csrf
+  <form method="POST" action="{{route('books.update',$book['id'])}}">
+   @csrf
+   @method('PUT')
     <div class="form-group">
       <label for="productTitle">Title:</label>
       <input type="text" class="form-control" name="title" id="productTitle" placeholder="Enter product title">
