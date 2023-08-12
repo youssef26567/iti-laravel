@@ -14,6 +14,8 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>
+            <th scope="col">Image</th>
+            <th scope="col">Category</th>
             <th scope="col">Price</th>
             <th scope="col">Delete</th>
             <th scope="col">Update</th>
@@ -25,6 +27,8 @@
           <tr>
             <th scope="row">{{$index}}</th>
             <td>{{$book['title']}}</td>
+            <td><img width="60px" height="60px" src="{{ asset('storage/books/') ."/". $book->pic}}" alt="null"></td>
+            <td>{{ $book->catagory->name ?? '-' }}</td>
             <td>{{$book['price']}}</td>
             <td>
               <form action="{{route('books.destroy',$book['id'])}}" method="POST">

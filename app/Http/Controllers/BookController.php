@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatBookRequest;
 use App\Models\Book;
+use App\Models\Catagory;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::orderBy('id', 'desc')->paginate(12);
+        $books = Book::orderBy('id', 'desc')->paginate(10);
         $page = "Books";
         return view('books', [
             "page" => $page,
@@ -21,16 +23,19 @@ class BookController extends Controller
     public function create()
     {
         $page = "create book";
-        return view('form', ['page' => $page]);
+        $catagories = Catagory::all();
+        return view('form', ['page' => $page ,'catagories'=> $catagories]);
     }
     // create
     public function store(Request $request)
     {
+         $fileName = Book::uploadFile($request, $request->pic);
         Book::create([
             "title" => $request->title,
             "price" => $request->price,
             "description" => $request->description,
-             "pic"=>"pic.png",
+             "cat_id" => $request->catagory,
+             "pic"=>$fileName,
         ]);
         return redirect()->route('books.index');
     }

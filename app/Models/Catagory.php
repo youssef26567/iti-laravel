@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Catagory extends Model
 {
@@ -13,4 +14,8 @@ class Catagory extends Model
         "name",
        
     ];
+    public function books(): HasMany
+    {
+        return $this->hasMany(Book::class,'cat_id');
+    }
 }
